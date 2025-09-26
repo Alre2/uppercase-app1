@@ -1,13 +1,14 @@
 function toUppercase(text) {
-  // Undvik ?? för maximal kompatibilitet med äldre Node-versioner
-  const s = (text === undefined || text === null) ? "" : String(text);
-  return s.toUpperCase();
+  if (text === undefined || text === null) return "";
+  return text.toString().toUpperCase();
 }
 
-// Export för Jest/Node
-module.exports = { toUppercase };
+// Export för Jest (Node)
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { toUppercase };
+}
 
-// Tillgänglig i webbläsaren
+// Gör funktionen global i webbläsaren
 if (typeof window !== "undefined") {
   window.toUppercase = toUppercase;
 }
